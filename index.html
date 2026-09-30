@@ -171,7 +171,7 @@
             }
         }
 
-        /* Style Teks Pesan Melayang Saat Love Diklik */
+        /* Style Teks Pesan Melayang Saat Love Diklik (Durasi 3 Detik) */
         .popup-text {
             position: absolute;
             bottom: 0;
@@ -193,7 +193,7 @@
             }
             20% {
                 opacity: 1;
-                transform: translateY(70vh) scale(1.1);
+                transform: translateY(65vh) scale(1.1);
             }
             80% {
                 opacity: 1;
@@ -248,7 +248,7 @@
         <!-- Teks Tebal Atas -->
         <h1 class="title">SAYANGGG NAA RIKOOO, AKUU KANGENNN</h1>
 
-        <!-- Bentuk Love Merah + Nama Chalysa (Klik me!) -->
+        <!-- Bentuk Love Merah + Nama Chalysa -->
         <div class="heart-wrapper" id="heartButton">
             <div class="heart"></div>
             <div class="heart-text">CHALYSA</div>
@@ -285,9 +285,6 @@
             "cantiknya rikoo",
             "loveyouu sayangg",
             "mwaahh 💕"
-            "CILLL" 
-            "LUCUUU BANGETT SI KAMUU"
-            "cayangg♥️"
         ];
 
         let msgIndex = 0;
@@ -306,12 +303,11 @@
             // Ganti pesan berurutan
             msgIndex = (msgIndex + 1) % messages.length;
 
-            // Hapus elemen setelah animasi selesai
+            // Hapus elemen tepat setelah 3 detik (3000 ms)
             setTimeout(() => {
                 textElem.remove();
             }, 3000);
         });
     </script>
 </body>
-  </html>
-  
+</html>
