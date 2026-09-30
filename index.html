@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Spesial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f051d;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Latar belakang efek glowing */
+        .bg-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.3) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        /* Teks Judul Atas */
+        .title {
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(255, 75, 92, 0.7),
+                         0 0 20px rgba(255, 75, 92, 0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        /* Wadah Bentuk Love */
+        .heart-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 50px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 1.2s infinite ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Bentuk Love Menggunakan CSS */
+        .heart {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #e63946;
+            transform: rotate(-45deg);
+            box-shadow: 0 0 25px rgba(230, 57, 70, 0.8),
+                        0 0 50px rgba(230, 57, 70, 0.4);
+            transition: transform 0.1s ease;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #e63946;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 60px;
+            top: 0;
+        }
+
+        /* Nama di Tengah Love */
+        .heart-text {
+            position: relative;
+            z-index: 20;
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-top: -10px;
+            pointer-events: none;
+        }
+
+        /* Teks Subtitle Bawah */
+        .subtitle {
+            color: #ffb703;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
+            text-transform: uppercase;
+        }
+
+        /* Animasi Denyut Jantung */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.15);
+            }
+            30% {
+                transform: scale(0.98);
+            }
+            45% {
+                transform: scale(1.08);
+            }
+            60% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Efek Partikel Cinta Melayang */
+        .floating-heart {
+            position: absolute;
+            color: #e63946;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Style Teks Pesan Melayang Saat Love Diklik */
+        .popup-text {
+            position: absolute;
+            bottom: 0;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #ff4b5c;
+            text-shadow: 0 0 10px rgba(255, 75, 92, 0.8),
+                         0 0 20px rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 30;
+            animation: floatTextUp 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes floatTextUp {
+            0% {
+                transform: translateY(100vh) scale(0.6);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(70vh) scale(1.1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Penyesuaian Ukuran Layar Kecil (Mobile) */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.4rem;
+            }
+            .heart-wrapper {
+                width: 140px;
+                height: 140px;
+            }
+            .heart {
+                width: 90px;
+                height: 90px;
+            }
+            .heart::before,
+            .heart::after {
+                width: 90px;
+                height: 90px;
+            }
+            .heart::before {
+                top: -45px;
+            }
+            .heart::after {
+                left: 45px;
+            }
+            .heart-text {
+                font-size: 1.3rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .popup-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="container">
+        <!-- Teks Tebal Atas -->
+        <h1 class="title">SAYANGGG NAA RIKOOO, AKUU KANGENNN</h1>
+
+        <!-- Bentuk Love Merah + Nama Chalysa (Klik me!) -->
+        <div class="heart-wrapper" id="heartButton">
+            <div class="heart"></div>
+            <div class="heart-text">CHALYSA</div>
+        </div>
+
+        <!-- Teks Bawah -->
+        <p class="subtitle">AKUUUU SAYANGGG KAMUUU CANTIKKK</p>
+    </div>
+
+    <!-- Script Partikel & Fitur Klik Love -->
+    <script>
+        // Efek Partikel Cinta Latar Belakang
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('floating-heart');
+            particle.innerHTML = '❤️';
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            particle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 7000);
+        }
+
+        setInterval(createParticle, 400);
+
+        // Fitur Klik Pada Logo Love
+        const messages = [
+            "chalysa cantikk",
+            "cantiknya rikoo",
+            "loveyouu sayangg",
+            "mwaahh 💕"
+        ];
+
+        let msgIndex = 0;
+
+        document.getElementById('heartButton').addEventListener('click', function() {
+            const textElem = document.createElement('div');
+            textElem.classList.add('popup-text');
+            textElem.innerText = messages[msgIndex];
+            
+            // Posisi acak horizontal antara 15% - 85% lebar layar
+            const randomX = Math.random() * 70 + 15;
+            textElem.style.left = randomX + 'vw';
+            
+            document.body.appendChild(textElem);
+
+            // Ganti pesan berurutan
+            msgIndex = (msgIndex + 1) % messages.length;
+
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                textElem.remove();
+            }, 3000);
+        });
+    </script>
+</body>
+  </html>
+  
